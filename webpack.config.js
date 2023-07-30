@@ -10,7 +10,7 @@ module.exports = {
     output: {
         // __dirname currnetly ../sandigan so when joined to /dist
         // resulting path is ../sandigan/dist
-        path: path.join(__dirname, '/dist'),
+        path: path.join(__dirname, '/build'),
         filename: 'bundle.js'
     },
 
@@ -46,6 +46,20 @@ module.exports = {
                         ]
                     }
                 }
+            },
+            {
+                // transpiles all our stylesheet files that have extensions .scss, .sass, or css
+                test: /\.s[ac]ss$/i,
+                use: ['style-loader', 'css-loader', 'sass-loader']
+            },
+            {
+                // transpiles all our media files that have extensions .png, .jpeg, .jpg, .gif, and .svg
+                test: /\.(png|jpe?g|gif|svg)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                    }
+                ]
             }
         ]
     }
